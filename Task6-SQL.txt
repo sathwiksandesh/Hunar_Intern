@@ -1,0 +1,47 @@
+-- Creating a Database
+CREATE DATABASE StudentDB;
+USE StudentDB;
+-- Create Student table
+CREATE TABLE Student (
+    Rollno INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Marks INT NOT NULL,
+    Aadhar VARCHAR(12) UNIQUE NOT NULL,
+    Address VARCHAR(200)
+);
+
+-- Create Course table
+CREATE TABLE Course (
+    Rollno INT,
+    Course VARCHAR(50) NOT NULL,
+    Course_Duration VARCHAR(50),
+    FOREIGN KEY (Rollno) REFERENCES Student(Rollno)
+);
+-- Insert into Student
+INSERT INTO Student VALUES (1, 'Ramesh', 75, '123456789012', 'Delhi');
+INSERT INTO Student VALUES (2, 'Suresh', 28, '234567890123', 'Mumbai');
+INSERT INTO Student VALUES (3, 'Raj', 90, '345678901234', 'Chennai');
+INSERT INTO Student VALUES (4, 'Rita', 22, '456789012345', 'Kolkata');
+INSERT INTO Student VALUES (5, 'Anita', 65, '567890123456', 'Pune');
+
+-- Insert into Course
+INSERT INTO Course VALUES (1, 'BCA', '3 Years');
+INSERT INTO Course VALUES (2, 'MCA', '2 Years');
+INSERT INTO Course VALUES (3, 'BCA', '3 Years');
+INSERT INTO Course VALUES (4, 'BBA', '3 Years');
+INSERT INTO Course VALUES (5, 'BCA', '3 Years');
+
+-- 1. Calculate the average of marks
+SELECT AVG(Marks) AS Average_Marks FROM Student;
+
+-- 2. Arrange names in ascending order
+SELECT Name FROM Student ORDER BY Name ASC;
+
+-- 3. RollNo and names of students scoring below 30
+SELECT Rollno, Name FROM Student WHERE Marks < 30;
+
+-- 4. RollNo of students whose names start with 'R'
+SELECT Rollno FROM Student WHERE Name LIKE 'R%';
+
+-- 5. RollNo of students pursuing BCA
+SELECT Rollno FROM Course WHERE Course = 'BCA';
